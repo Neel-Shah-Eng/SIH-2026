@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>SAHAYA | Live Activity</title>
+
+    <link rel="stylesheet"
+          href="style.css">
+
+</head>
+
+
+<body>
+
+
+<nav>
+
+    <div class="logo">
+        SAHAYA
+    </div>
+
+    <div class="nav-links">
+
+        <a href="index.html">Home</a>
+
+        <a href="workers.html">
+            Workers
+        </a>
+
+        <a href="community.html">
+            Community
+        </a>
+
+        <a href="booking.html">
+            Book Service
+        </a>
+
+        <a href="dashboard.html">
+            Dashboard
+        </a>
+
+        <a href="public.html">
+            Live Activity
+        </a>
+
+        <a href="safety.html">
+            🛡️ Safety
+        </a>
+
+    </div>
+
+</nav>
+
+
+<section class="public-section">
+
+
+    <div class="page-heading">
+
+        <p class="section-label">
+            COMMUNITY ACTIVITY
+        </p>
+
+        <h1>
+            Live Service Network
+        </h1>
+
+        <p>
+            Anonymized service activity across the cooperative network.
+        </p>
+
+    </div>
+
+
+    <div id="publicBookings"
+         class="public-bookings">
+
+    </div>
+
+
+</section>
+
+
+<script src="script.js"></script>
+
+
+<script>
+
+
+// ------------------------------------------
+// PUBLIC BOOKING DATABASE
+// ------------------------------------------
+
+function loadPublicBookings() {
+
+    const container =
+        document.getElementById(
+            "publicBookings"
+        );
+
+
+    if (!container) return;
+
+
+    const bookings =
+        JSON.parse(
+            localStorage.getItem(
+                "sahayaBookings"
+            )
+        ) || [];
+
+
+    if (bookings.length === 0) {
+
+        container.innerHTML = `
+
+            <div class="empty-bookings">
+
+                <div class="empty-icon">
+                    📊
+                </div>
+
+                <h3>
+                    No active bookings
+                </h3>
+
+                <p>
+                    New community service requests
+                    will appear here.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML = "";
+
+
+    bookings.forEach(function(booking) {
+
+
+        const card =
+            document.createElement("div");
+
+
+        card.className =
+            "public-booking-card";
+
+
+        card.innerHTML = `
+
+            <div class="public-top">
+
+                <div>
+
+                    <span class="booking-id">
+                        ${booking.bookingID}
+                    </span>
+
+                    <h3>
+                        ${getServiceIcon(booking.service)}
+                        ${booking.service}
+                    </h3>
+
+                </div>
+
+
+                <span class="live-status">
+
+                    ● ${booking.status}
+
+                </span>
+
+            </div>
+
+
+            <div class="public-details">
+
+                <p>
+                    📍 ${booking.location}
+                </p>
+
+                <p>
+                    📅 ${booking.date}
+                </p>
+
+                <p>
+                    ⏰ ${booking.time}
+                </p>
+
+                <p>
+                    👷 ${booking.worker}
+                </p>
+
+                <p>
+                    🚗 ETA:
+                    ${booking.eta}
+                </p>
+
+            </div>
+
+
+            <div class="privacy-note">
+
+                🔒 Customer information is protected.
+
+                Exact address, phone number and
+                personal details are never displayed
+                publicly.
+
+            </div>
+
+        `;
+
+
+        container.appendChild(card);
+
+    });
+
+}
+
+
+// ------------------------------------------
+// INITIAL LOAD
+// ------------------------------------------
+
+loadPublicBookings();
+
+
+// ------------------------------------------
+// REAL-TIME UPDATE
+// ------------------------------------------
+
+window.addEventListener(
+    "storage",
+    function(event) {
+
+        if (
+            event.key ===
+            "sahayaBookings"
+        ) {
+
+            loadPublicBookings();
+
+        }
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>

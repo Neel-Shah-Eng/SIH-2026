@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Sahaya | Dashboard</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+<header class="navbar">
+
+<a href="index.html" class="logo">
+    <span>✦</span>
+    SAHAYA
+</a>
+
+<nav>
+
+<a href="workers.html">
+    Workers
+</a>
+
+<a href="community.html">
+    Community Hub
+</a>
+
+<a href="booking.html">
+    Book Service
+</a>
+
+<a href="dashboard.html">
+    Dashboard
+</a>
+
+</nav>
+
+<button class="login-btn">
+    Login
+</button>
+
+</header>
+
+
+<section class="dashboard">
+
+<div class="dashboard-heading">
+
+<div>
+
+<p class="section-label">
+    MY DASHBOARD
+</p>
+
+<h1>
+    Welcome back 👋
+</h1>
+
+</div>
+
+<a href="booking.html">
+
+<button class="primary-btn">
+    + New Booking
+</button>
+
+</a>
+
+</div>
+
+
+<div class="stats-grid">
+
+
+<div class="stat-card">
+
+<span>
+    📅
+</span>
+
+<h2>
+    3
+</h2>
+
+<p>
+    Active Bookings
+</p>
+
+</div>
+
+
+<div class="stat-card">
+
+<span>
+    ✓
+</span>
+
+<h2>
+    12
+</h2>
+
+<p>
+    Completed Services
+</p>
+
+</div>
+
+
+<div class="stat-card">
+
+<span>
+    ⭐
+</span>
+
+<h2>
+    4.9
+</h2>
+
+<p>
+    Your Rating
+</p>
+
+</div>
+
+
+<div class="stat-card">
+
+<span>
+    🤝
+</span>
+
+<h2>
+    8
+</h2>
+
+<p>
+    Community Connections
+</p>
+
+</div>
+
+
+</div>
+
+
+<div class="dashboard-panel">
+
+<h2>
+    Recent Bookings
+</h2>
+<div class="dashboard-panel">
+
+    <div class="panel-header">
+
+        <div>
+
+            <p class="section-label">
+                SAFETY
+            </p>
+
+            <h2>
+                Active Service Tracking
+            </h2>
+
+        </div>
+
+    </div>
+
+
+    <div class="tracking-box">
+
+        <div class="tracking-map">
+
+            📍
+
+            <div>
+
+                <strong>
+                    Worker is on the way
+                </strong>
+
+                <p>
+                    Location tracking active
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="tracking-info">
+
+            <div>
+
+                <small>
+                    STATUS
+                </small>
+
+                <strong>
+                    🚗 ON THE WAY
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <small>
+                    ETA
+                </small>
+
+                <strong>
+                    18 MIN
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <small>
+                    SAFETY
+                </small>
+
+                <strong>
+                    🛡️ VERIFIED
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <a href="safety.html"
+           class="primary-btn">
+
+            Open Safety Centre
+
+        </a>
+
+    </div>
+
+</div>
+.tracking-box {
+
+    padding: 25px;
+
+}
+
+
+.tracking-map {
+
+    min-height: 220px;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,0.08),
+            rgba(255,255,255,0.02)
+        );
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 15px;
+
+    font-size: 45px;
+
+}
+
+
+.tracking-map strong {
+
+    display: block;
+
+    font-size: 18px;
+
+}
+
+
+.tracking-map p {
+
+    font-size: 14px;
+
+    opacity: 0.6;
+
+}
+
+
+.tracking-info {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 15px;
+
+    margin: 20px 0;
+
+}
+
+
+.tracking-info div {
+
+    padding: 15px;
+
+    border-radius: 15px;
+
+    background:
+        rgba(255,255,255,0.05);
+
+}
+
+
+.tracking-info small,
+.tracking-info strong {
+
+    display: block;
+
+}
+
+
+.tracking-info small {
+
+    opacity: 0.5;
+
+    margin-bottom: 6px;
+
+}
+
+
+@media (max-width: 600px) {
+
+    .tracking-info {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
+
+
+<div class="booking-row">
+
+<div>
+    <strong>
+        Electrical Repair
+    </strong>
+
+    <p>
+        Ramesh Kumar • Today
+    </p>
+</div>
+
+<span class="booking-status">
+    CONFIRMED
+</span>
+
+</div>
+
+
+<div class="booking-row">
+
+<div>
+    <strong>
+        Home Cleaning
+    </strong>
+
+    <p>
+        Priya Sharma • 14 Sept
+    </p>
+</div>
+
+<span class="booking-status">
+    SCHEDULED
+</span>
+
+</div>
+
+
+<div class="booking-row">
+
+<div>
+    <strong>
+        Plumbing
+    </strong>
+
+    <p>
+        Arjun Mehta • 18 Sept
+    </p>
+</div>
+
+<span class="booking-status">
+    PENDING
+</span>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<footer>
+
+<strong>SAHAYA</strong>
+
+<p>
+    Your cooperative service network.
+</p>
+
+</footer>
+
+</body>
+
+</html>

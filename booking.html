@@ -1,0 +1,113 @@
+const bookingForm =
+    document.getElementById("bookingForm");
+
+
+if (bookingForm) {
+
+    bookingForm.addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+
+            const bookingData = {
+
+                name:
+                    document.getElementById("name").value.trim(),
+
+                phone:
+                    document.getElementById("phone").value.trim(),
+
+                service:
+                    document.getElementById("service").value,
+
+                date:
+                    document.getElementById("date").value,
+
+                time:
+                    document.getElementById("time").value,
+
+                location:
+                    document.getElementById("location").value.trim(),
+
+                description:
+                    document.getElementById("description").value.trim()
+
+            };
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        "http://localhost:3000/api/bookings",
+                        {
+
+                            method: "POST",
+
+                            headers: {
+
+                                "Content-Type":
+                                    "application/json"
+
+                            },
+
+                            body:
+                                JSON.stringify(
+                                    bookingData
+                                )
+
+                        }
+                    );
+
+
+                const result =
+                    await response.json();
+
+
+                if (!response.ok) {
+
+                    alert(
+                        result.error ||
+                        "Booking failed."
+                    );
+
+                    return;
+
+                }
+
+
+                // Show success modal
+
+                const modal =
+                    document.getElementById(
+                        "successModal"
+                    );
+
+
+                if (modal) {
+
+                    modal.style.display =
+                        "flex";
+
+                }
+
+
+                bookingForm.reset();
+
+
+            } catch (error) {
+
+                console.error(error);
+
+                alert(
+                    "Cannot connect to SAHAYA server."
+                );
+
+            }
+
+        }
+    );
+
+}
