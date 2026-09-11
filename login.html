@@ -1,140 +1,32 @@
-
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Sahaya - Login Demo</title>
+<title>Sahaya - Login Demo (connected to Java backend)</title>
 <style>
   * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    background: #0a0a12;
-    font-family: 'Segoe UI', Arial, sans-serif;
-    color: #fff;
-  }
-  nav {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    padding: 16px 32px;
-  }
-  #loginBtn {
-    background: #fff;
-    color: #111;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    font-size: 14px;
-  }
+  body { margin: 0; background: #0a0a12; font-family: 'Segoe UI', Arial, sans-serif; color: #fff; }
+  nav { display: flex; justify-content: flex-end; align-items: center; padding: 16px 32px; }
+  #loginBtn { background: #fff; color: #111; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 14px; }
   #loginBtn:hover { background: #eee; }
-
-  /* Modal overlay */
-  .overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.6);
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-  }
+  .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); align-items: center; justify-content: center; z-index: 1000; }
   .overlay.active { display: flex; }
-
-  .modal {
-    background: #14141f;
-    border: 1px solid #2a2a3a;
-    border-radius: 14px;
-    padding: 32px;
-    width: 340px;
-    position: relative;
-  }
-  .modal h2 {
-    margin: 0 0 20px;
-    font-size: 22px;
-  }
-  .modal label {
-    display: block;
-    font-size: 13px;
-    color: #aaa;
-    margin-bottom: 6px;
-    margin-top: 14px;
-  }
-  .modal input {
-    width: 100%;
-    padding: 10px 12px;
-    border-radius: 8px;
-    border: 1px solid #333;
-    background: #1c1c2a;
-    color: #fff;
-    font-size: 14px;
-  }
-  .modal input:focus {
-    outline: none;
-    border-color: #8b5cf6;
-  }
-  .error-msg {
-    color: #ff6b6b;
-    font-size: 13px;
-    margin-top: 10px;
-    min-height: 16px;
-  }
-  .submitBtn {
-    width: 100%;
-    margin-top: 20px;
-    padding: 11px;
-    border: none;
-    border-radius: 8px;
-    background: linear-gradient(90deg, #8b5cf6, #6366f1);
-    color: #fff;
-    font-weight: 600;
-    cursor: pointer;
-    font-size: 15px;
-  }
-  .submitBtn:hover { opacity: 0.9; }
-  .closeBtn {
-    position: absolute;
-    top: 14px;
-    right: 16px;
-    background: none;
-    border: none;
-    color: #888;
-    font-size: 20px;
-    cursor: pointer;
-  }
+  .modal { background: #14141f; border: 1px solid #2a2a3a; border-radius: 14px; padding: 32px; width: 340px; position: relative; }
+  .modal h2 { margin: 0 0 20px; font-size: 22px; }
+  .modal label { display: block; font-size: 13px; color: #aaa; margin-bottom: 6px; margin-top: 14px; }
+  .modal input { width: 100%; padding: 10px 12px; border-radius: 8px; border: 1px solid #333; background: #1c1c2a; color: #fff; font-size: 14px; }
+  .modal input:focus { outline: none; border-color: #8b5cf6; }
+  .error-msg { color: #ff6b6b; font-size: 13px; margin-top: 10px; min-height: 16px; }
+  .hint { color: #666; font-size: 12px; margin-top: 6px; }
+  .submitBtn { width: 100%; margin-top: 20px; padding: 11px; border: none; border-radius: 8px; background: linear-gradient(90deg, #8b5cf6, #6366f1); color: #fff; font-weight: 600; cursor: pointer; font-size: 15px; }
+  .submitBtn:disabled { opacity: 0.6; cursor: not-allowed; }
+  .submitBtn:hover:not(:disabled) { opacity: 0.9; }
+  .closeBtn { position: absolute; top: 14px; right: 16px; background: none; border: none; color: #888; font-size: 20px; cursor: pointer; }
   .closeBtn:hover { color: #fff; }
-
-  #userBadge {
-    display: none;
-    align-items: center;
-    gap: 8px;
-    background: #1c1c2a;
-    padding: 6px 14px 6px 6px;
-    border-radius: 30px;
-    font-size: 14px;
-  }
+  #userBadge { display: none; align-items: center; gap: 8px; background: #1c1c2a; padding: 6px 14px 6px 6px; border-radius: 30px; font-size: 14px; }
   #userBadge.active { display: flex; }
-  #userBadge .avatar {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #8b5cf6, #38bdf8);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    font-size: 13px;
-  }
-  #userBadge button {
-    background: none;
-    border: none;
-    color: #aaa;
-    cursor: pointer;
-    font-size: 12px;
-    margin-left: 6px;
-    text-decoration: underline;
-  }
+  #userBadge .avatar { width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, #8b5cf6, #38bdf8); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; }
+  #userBadge button { background: none; border: none; color: #aaa; cursor: pointer; font-size: 12px; margin-left: 6px; text-decoration: underline; }
 </style>
 </head>
 <body>
@@ -148,26 +40,29 @@
   </div>
 </nav>
 
-<!-- Login Modal -->
 <div class="overlay" id="loginOverlay">
   <div class="modal">
     <button class="closeBtn" onclick="closeLogin()">&times;</button>
     <h2>Login to Sahaya</h2>
     <form id="loginForm" onsubmit="return handleLogin(event)">
       <label for="email">Email</label>
-      <input type="email" id="email" placeholder="you@example.com" required>
+      <input type="email" id="email" placeholder="demo@sahaya.com" required>
 
       <label for="password">Password</label>
       <input type="password" id="password" placeholder="Enter password" required minlength="6">
+      <div class="hint">Try the seeded account: demo@sahaya.com / demo123</div>
 
       <div class="error-msg" id="errorMsg"></div>
 
-      <button type="submit" class="submitBtn">Login</button>
+      <button type="submit" class="submitBtn" id="submitBtn">Login</button>
     </form>
   </div>
 </div>
 
 <script>
+  // Point this at your Spring Boot server
+  const API_BASE = 'http://localhost:8080/api';
+
   function openLogin() {
     document.getElementById('loginOverlay').classList.add('active');
     document.getElementById('errorMsg').textContent = '';
@@ -177,78 +72,67 @@
     document.getElementById('loginOverlay').classList.remove('active');
   }
 
-  // Close modal when clicking outside it
-  document.getElementById('loginOverlay').addEventListener('click', function(e) {
+  document.getElementById('loginOverlay').addEventListener('click', function (e) {
     if (e.target === this) closeLogin();
   });
 
-  function handleLogin(e) {
+  async function handleLogin(e) {
     e.preventDefault();
     const email = document.getElementById('email').value.trim();
     const password = document.getElementById('password').value;
     const errorMsg = document.getElementById('errorMsg');
+    const submitBtn = document.getElementById('submitBtn');
 
-    if (!email.includes('@') || !email.includes('.')) {
-      errorMsg.textContent = 'Please enter a valid email address.';
-      return false;
-    }
-    if (password.length < 6) {
-      errorMsg.textContent = 'Password must be at least 6 characters.';
-      return false;
+    errorMsg.textContent = '';
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Logging in...';
+
+    try {
+      const response = await fetch(`${API_BASE}/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        errorMsg.textContent = data.message || 'Login failed. Please try again.';
+        return false;
+      }
+
+      loginUser(data.name, data.email);
+      closeLogin();
+      document.getElementById('loginForm').reset();
+    } catch (err) {
+      errorMsg.textContent = 'Could not reach the server. Is the backend running?';
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Login';
     }
 
-    // ---- Demo login logic ----
-    // Replace this block with a real fetch() call to your backend/auth API.
-    loginUser(email);
-    closeLogin();
-    document.getElementById('loginForm').reset();
     return false;
   }
 
-  function loginUser(email) {
-    const name = email.split('@')[0];
+  function loginUser(name, email) {
     document.getElementById('userName').textContent = name;
     document.getElementById('avatarInitial').textContent = name.charAt(0).toUpperCase();
     document.getElementById('userBadge').classList.add('active');
     document.getElementById('loginBtn').style.display = 'none';
-
-    // Persist session for this tab (optional)
-    sessionStorage.setItem('sahaya_user', name);
+    sessionStorage.setItem('sahaya_user_name', name);
+    sessionStorage.setItem('sahaya_user_email', email);
   }
 
   function logout() {
     document.getElementById('userBadge').classList.remove('active');
     document.getElementById('loginBtn').style.display = 'inline-block';
-    sessionStorage.removeItem('sahaya_user');
+    sessionStorage.removeItem('sahaya_user_name');
+    sessionStorage.removeItem('sahaya_user_email');
   }
 
-  // Restore session on page load
-  window.addEventListener('load', function() {
-    const saved = sessionStorage.getItem('sahaya_user');
-    if (saved) loginUser(saved + '@example.com');
+  window.addEventListener('load', function () {
+    const name = sessionStorage.getItem('sahaya_user_name');
+    const email = sessionStorage.getItem('sahaya_user_email');
+    if (name && email) loginUser(name, email);
   });
 </script>
-
-</body>
-</html>
-    background-color: transparent;
-    color: #ffffff;
-    border: 1px solid #333333; 
-    padding: 8px 20px;
-    border-radius: 6px;
-    text-decoration: none;
-    font-family: system-ui, -apple-system, sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-
-  .login-btn:hover {
-    background-color: #2a2a2a; 
-    border-color: #555555;
-  }
-</style>
-
-<!-- The magic portal -->
-<a href="login.html" class="login-btn">Login</a>
