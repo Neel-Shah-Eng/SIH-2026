@@ -1,113 +1,267 @@
-const bookingForm =
-    document.getElementById("bookingForm");
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Sahaya | Book Service</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
 
 
-if (bookingForm) {
+<body>
 
-    bookingForm.addEventListener(
-        "submit",
-        async function(event) {
+<header class="navbar">
 
-            event.preventDefault();
+<a href="index.html" class="logo">
+    <span>✦</span>
+    SAHAYA
+</a>
 
+<nav>
 
-            const bookingData = {
+<a href="workers.html">
+    Workers
+</a>
 
-                name:
-                    document.getElementById("name").value.trim(),
+<a href="community.html">
+    Community Hub
+</a>
 
-                phone:
-                    document.getElementById("phone").value.trim(),
+<a href="booking.html">
+    Book Service
+</a>
 
-                service:
-                    document.getElementById("service").value,
+<a href="dashboard.html">
+    Dashboard
+</a>
 
-                date:
-                    document.getElementById("date").value,
+</nav>
 
-                time:
-                    document.getElementById("time").value,
+<button class="login-btn">
+    Login
+</button>
 
-                location:
-                    document.getElementById("location").value.trim(),
-
-                description:
-                    document.getElementById("description").value.trim()
-
-            };
-
-
-            try {
-
-                const response =
-                    await fetch(
-                        "http://localhost:3000/api/bookings",
-                        {
-
-                            method: "POST",
-
-                            headers: {
-
-                                "Content-Type":
-                                    "application/json"
-
-                            },
-
-                            body:
-                                JSON.stringify(
-                                    bookingData
-                                )
-
-                        }
-                    );
+</header>
 
 
-                const result =
-                    await response.json();
+<section class="page-header">
+
+<p class="section-label">
+    SERVICE REQUEST
+</p>
+
+<h1>
+    Book a Service
+</h1>
+
+<p>
+    Tell us what you need and we'll connect
+    you with a verified local provider.
+</p>
+
+</section>
 
 
-                if (!response.ok) {
+<section class="section">
 
-                    alert(
-                        result.error ||
-                        "Booking failed."
-                    );
+<div class="booking-container">
 
-                    return;
+<form id="bookingForm">
 
-                }
+<div class="form-grid">
 
 
-                // Show success modal
+<div>
 
-                const modal =
-                    document.getElementById(
-                        "successModal"
-                    );
+<label>
+    Your Name
+</label>
 
+<input
+type="text"
+id="name"
+placeholder="Enter your name"
+required>
 
-                if (modal) {
-
-                    modal.style.display =
-                        "flex";
-
-                }
-
-
-                bookingForm.reset();
+</div>
 
 
-            } catch (error) {
+<div>
 
-                console.error(error);
+<label>
+    Phone Number
+</label>
 
-                alert(
-                    "Cannot connect to SAHAYA server."
-                );
+<input
+type="tel"
+placeholder="9876543210"
+required>
 
-            }
+</div>
 
-        }
-    );
 
-}
+<div>
+
+<label>
+    Service
+</label>
+
+<select id="service" required>
+
+<option value="">
+    Select service
+</option>
+
+<option>
+    Plumbing
+</option>
+
+<option>
+    Electrical
+</option>
+
+<option>
+    Cleaning
+</option>
+
+<option>
+    Carpentry
+</option>
+
+<option>
+    Gardening
+</option>
+
+</select>
+
+</div>
+
+
+<div>
+
+<label>
+    Date
+</label>
+
+<input
+type="date"
+required>
+
+</div>
+
+
+<div>
+
+<label>
+    Time
+</label>
+
+<input
+type="time"
+required>
+
+</div>
+
+
+<div>
+
+<label>
+    Location
+</label>
+
+<input
+type="text"
+placeholder="Your area"
+required>
+
+</div>
+
+
+<div class="full">
+
+<label>
+    Describe your problem
+</label>
+
+<textarea
+placeholder="Tell us what needs to be done..."
+></textarea>
+
+</div>
+
+
+</div>
+
+
+<button
+class="primary-btn full"
+type="submit">
+
+Request Service →
+
+</button>
+
+</form>
+
+</div>
+
+</section>
+
+
+<div
+class="modal"
+id="successModal">
+
+<div class="modal-box">
+
+<div class="success">
+    ✓
+</div>
+
+<h2>
+    Request Submitted!
+</h2>
+
+<p>
+    Your request has been received.
+    A verified cooperative worker will
+    be assigned shortly.
+</p>
+
+<button
+class="primary-btn"
+onclick="closeModal()">
+
+Done
+
+</button>
+
+</div>
+
+</div>
+
+
+<footer>
+
+<strong>SAHAYA</strong>
+
+<p>
+    Cooperative-powered services.
+</p>
+
+</footer>
+
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
